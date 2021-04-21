@@ -1,0 +1,27 @@
+{
+  "name": "MoneyGo/MoneyGo-api",
+  "description": "Api for money go wallet",
+  "minimum-stability": "stable",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://money-go.com",
+  "authors": [
+    {
+      "name": "Ivan",
+      "email": "nkfrez@gmail.com"
+    }
+  ],
+  "require": {
+    "php" : "^7.0",
+    "guzzlehttp/guzzle": "^6.5.5",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "MoneyGo\\": "src/"
+    }
+  },
+  "require-dev": {
+    "larapack/dd": "1.*"
+  }
+}
