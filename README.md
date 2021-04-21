@@ -1,1 +1,1 @@
-# MoneyGo_api
+# Api for MoneyGo wallet
