@@ -78,7 +78,7 @@ $apiProvider->currencies()
         ->response()
         ->getResult()
 ```
-####Buy voucher
+#### Buy voucher
 ```    
     $apiProvider->buyVoucher()
         ->setAmount('0.1')
