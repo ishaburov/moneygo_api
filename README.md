@@ -29,26 +29,26 @@ $apiProvider = new MoneyGoApi();
     $apiProvider->setAccessToken($accessToken);    
 ```
 ### 3. Available methods
-#### Get information about self account
+#### Get information about my account
 ```
 $apiProvider->getMe()
         ->send()
         ->getResult()
 ```
-#### Get available wallets your account
+#### Get information about available wallets in your account
 ```     
 $apiProvider->getWallets()
         ->send()
         ->getResult()
 ```
-#### Search client wallet's which use moneyGO wallet
+#### Search client wallet's which use MoneyGo wallet
 ```
 $apiProvider->searchWallet()
         ->setWalletNumber('CLIENT_WALLET_NUMBER')
         ->send()
         ->getResult()
 ```
-#### Check exists client wallet's which use moneyGO wallet
+#### Check exists client wallet's which use MoneyGo wallet
 ```   
    $apiProvider->walletExists()
         ->setWalletFromNumber('CLIENT_WALLET_NUMBER')
@@ -67,7 +67,7 @@ $apiProvider->searchWallet()
         ->send()
         ->getResult()
 ```
-#### Get all currencies which use moneyGo
+#### Get all currencies which are used on MoneyGo
 ```
 $apiProvider->currencies()
         ->send()
