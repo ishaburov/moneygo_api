@@ -1,10 +1,10 @@
 {
-  "name": "MoneyGo/MoneyGo-api",
+  "name": "money-go/money-go-api",
   "description": "Api for money go wallet",
   "minimum-stability": "stable",
   "type": "library",
   "license": "MIT",
-  "homepage": "https://money-go.com",
+  "homepage": "https://api.money-go.com",
   "authors": [
     {
       "name": "Ivan",
