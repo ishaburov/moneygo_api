@@ -27,25 +27,26 @@ $apiProvider = (new MoneyGo\Client())->getApiProvider();
     $apiProvider->setAccessToken($accessToken);    
 ```
 ### 3. Available methods
-####Get information about self account
-``` $apiProvider->getMe()
+#### Get information about self account
+```
+$apiProvider->getMe()
         ->response()
         ->getResult()
 ```
-####Get available wallets your account
+#### Get available wallets your account
 ```     
 $apiProvider->getWallets()
         ->response()
         ->getResult()
 ```
-####Search client wallet's which use moneyGO wallet
+#### Search client wallet's which use moneyGO wallet
 ```
 $apiProvider->searchWallet()
         ->setWalletNumber('CLIENT_WALLET_NUMBER')
         ->response()
         ->getResult()
 ```
-####Check exists client wallet's which use moneyGO wallet
+#### Check exists client wallet's which use moneyGO wallet
 ```   
    $apiProvider->walletExists()
         ->setWalletFromNumber('CLIENT_WALLET_NUMBER')
@@ -53,7 +54,7 @@ $apiProvider->searchWallet()
         ->response()
         ->getResult()
 ```
-####Withdraw money to moneyGO client wallet's
+#### Withdraw money to moneyGO client wallet's
 ```  
   $apiProvider->transfer()
         ->setWalletFromNumber(YOUR_WALLET_NUMBER')
@@ -64,13 +65,13 @@ $apiProvider->searchWallet()
         ->response()
         ->getResult()
 ```
-####Get all currencies which use moneyGo
+#### Get all currencies which use moneyGo
 ```
 $apiProvider->currencies()
         ->response()
         ->getResult()
 ```
-####Get pagination vouchers
+#### Get pagination vouchers
 ```   
    $apiProvider->vouchers()
         ->setPage(1)
@@ -86,7 +87,7 @@ $apiProvider->currencies()
         ->response()
         ->getResult();
 ```
-####Find voucher for activation
+#### Find voucher for activation
 ```   
    $apiProvider->findVoucher()
         ->setWalletNumber('YOUR_WALLET_NUMBER')
@@ -95,7 +96,7 @@ $apiProvider->currencies()
         ->response()
         ->getResult();
 ```
-####Activate voucher
+#### Activate voucher
 ``` 
  $apiProvider->activateVoucher()
         ->setWalletNumber('WALLET_NUMBER') // You can activate to other wallet
@@ -105,7 +106,7 @@ $apiProvider->currencies()
         ->response()
         ->getResult()
 ```
-####Processing checkout(Create payment link, deposit your account)
+#### Processing checkout(Create payment link, deposit your account)
 ``` 
  $apiProvider->processingCheckout()
         ->setSecret('FORM_SECRET_KEY')
