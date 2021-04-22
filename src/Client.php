@@ -11,6 +11,9 @@ final class Client
     /*** @var string */
     private $baseUrl;
 
+    /**
+     * Client constructor.
+     */
     public function __construct()
     {
         $this->onInit();
@@ -27,7 +30,10 @@ final class Client
         $this->client = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl]);
     }
 
-    public function getClient()
+    /**
+     * @return \GuzzleHttp\Client
+     */
+    public function getClient(): \GuzzleHttp\Client
     {
         return $this->client;
     }
@@ -38,6 +44,9 @@ final class Client
     }
 
 
+    /**
+     * @return ApiProvider
+     */
     public function getApiProvider(): ApiProvider
     {
         return new ApiProvider($this);

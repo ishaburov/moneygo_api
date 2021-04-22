@@ -16,6 +16,7 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @param mixed $voucherNumber
+     * @return ActivateVoucher
      */
     public function setVoucherNumber($voucherNumber): ActivateVoucher
     {
@@ -25,6 +26,7 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @param mixed $voucherCode
+     * @return ActivateVoucher
      */
     public function setVoucherCode($voucherCode): ActivateVoucher
     {
@@ -34,6 +36,7 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @param mixed $walletId
+     * @return ActivateVoucher
      */
     public function setWalletId($walletId): ActivateVoucher
     {
@@ -43,6 +46,7 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @param mixed $walletNumber
+     * @return ActivateVoucher
      */
     public function setWalletNumber($walletNumber): ActivateVoucher
     {
@@ -52,6 +56,7 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @param mixed $description
+     * @return ActivateVoucher
      */
     public function setDescription($description): ActivateVoucher
     {
@@ -59,8 +64,10 @@ final class ActivateVoucher extends BaseMethod
         return $this;
     }
 
-
-    public function response()
+    /**
+     * @return $this
+     */
+    public function send(): ActivateVoucher
     {
         $content = $this->client
             ->post("api/vouchers/activation", [
@@ -87,6 +94,9 @@ final class ActivateVoucher extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getResult(): array
     {
         return $this->arrayResult['data'];

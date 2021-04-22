@@ -15,6 +15,7 @@ final class FindVoucher extends BaseMethod
 
     /**
      * @param mixed $voucherNumber
+     * @return FindVoucher
      */
     public function setVoucherNumber($voucherNumber): FindVoucher
     {
@@ -24,6 +25,7 @@ final class FindVoucher extends BaseMethod
 
     /**
      * @param mixed $voucherCode
+     * @return FindVoucher
      */
     public function setVoucherCode($voucherCode): FindVoucher
     {
@@ -33,6 +35,7 @@ final class FindVoucher extends BaseMethod
 
     /**
      * @param mixed $walletId
+     * @return FindVoucher
      */
     public function setWalletId($walletId): FindVoucher
     {
@@ -42,6 +45,7 @@ final class FindVoucher extends BaseMethod
 
     /**
      * @param mixed $walletNumber
+     * @return FindVoucher
      */
     public function setWalletNumber($walletNumber): FindVoucher
     {
@@ -49,8 +53,10 @@ final class FindVoucher extends BaseMethod
         return $this;
     }
 
-
-    public function response()
+    /**
+     * @return $this|mixed
+     */
+    public function send(): FindVoucher
     {
         $content = $this->client
             ->get("api/vouchers/activation", [
@@ -76,6 +82,9 @@ final class FindVoucher extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return FindVoucherResource
+     */
     public function getResult(): FindVoucherResource
     {
         $data = $this->arrayResult['data'];

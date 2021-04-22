@@ -17,7 +17,10 @@ final class SearchWallet extends BaseMethod
         return $this;
     }
 
-    public function response(): SearchWallet
+    /**
+     * @return $this
+     */
+    public function send(): SearchWallet
     {
         $content = $this->client
             ->get("api/wallets/search/{$this->walletNumber}", [
@@ -37,6 +40,9 @@ final class SearchWallet extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return SearchWalletResource
+     */
     public function getResult(): SearchWalletResource
     {
         $result = $this->arrayResult['data'];

@@ -19,6 +19,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $secret
+     * @return ProcessingCheckout
      */
     public function setSecret($secret): ProcessingCheckout
     {
@@ -28,6 +29,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $id
+     * @return ProcessingCheckout
      */
     public function setId($id): ProcessingCheckout
     {
@@ -37,6 +39,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $amount
+     * @return ProcessingCheckout
      */
     public function setAmount($amount): ProcessingCheckout
     {
@@ -46,6 +49,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $walletFromNumber
+     * @return ProcessingCheckout
      */
     public function setWalletFromNumber($walletFromNumber): ProcessingCheckout
     {
@@ -55,6 +59,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $walletTo
+     * @return ProcessingCheckout
      */
     public function setWalletToNumber($walletTo): ProcessingCheckout
     {
@@ -64,6 +69,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $successUrl
+     * @return ProcessingCheckout
      */
     public function setSuccessUrl($successUrl): ProcessingCheckout
     {
@@ -73,6 +79,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $cancelUrl
+     * @return ProcessingCheckout
      */
     public function setCancelUrl($cancelUrl): ProcessingCheckout
     {
@@ -82,6 +89,7 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @param mixed $statusUrl
+     * @return ProcessingCheckout
      */
     public function setStatusUrl($statusUrl): ProcessingCheckout
     {
@@ -89,8 +97,10 @@ final class ProcessingCheckout extends BaseMethod
         return $this;
     }
 
-
-    public function response(): ProcessingCheckout
+    /**
+     * @return $this
+     */
+    public function send(): ProcessingCheckout
     {
 
         $content = $this->client
@@ -122,6 +132,9 @@ final class ProcessingCheckout extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return ProcessingCheckoutResource
+     */
     public function getResult(): ProcessingCheckoutResource
     {
         $data = $this->arrayResult['data'];
@@ -133,6 +146,9 @@ final class ProcessingCheckout extends BaseMethod
         return $processingCheckout;
     }
 
+    /**
+     * @return string
+     */
     protected function makeSignature(): string
     {
         $data = [

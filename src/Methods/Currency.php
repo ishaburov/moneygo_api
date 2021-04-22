@@ -9,7 +9,10 @@ use MoneyGo\Resource\CurrencyResource;
 final class Currency extends BaseMethod
 {
 
-    public function response(): Currency
+    /**
+     * @return $this
+     */
+    public function send(): Currency
     {
         $content = $this->client
             ->get("api/currencies", [
@@ -29,6 +32,10 @@ final class Currency extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     public function getResult(): array
     {
         if (!isset($this->arrayResult['data'])) {

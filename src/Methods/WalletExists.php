@@ -35,7 +35,10 @@ final class WalletExists extends BaseMethod
         return $this;
     }
 
-    public function response(): WalletExists
+    /**
+     * @return $this
+     */
+    public function send(): WalletExists
     {
         $content = $this->client
             ->get("api/wallet-exists", [
@@ -59,6 +62,9 @@ final class WalletExists extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return WalletExistsResource
+     */
     public function getResult(): WalletExistsResource
     {
         $result = $this->arrayResult['data'];

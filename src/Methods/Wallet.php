@@ -9,7 +9,10 @@ use MoneyGo\Resource\WalletResource;
 
 final class Wallet extends BaseMethod
 {
-    public function response(): Wallet
+    /**
+     * @return $this
+     */
+    public function send(): Wallet
     {
         $content = $this->client
             ->get('api/wallets', ['headers' => [
@@ -27,6 +30,9 @@ final class Wallet extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getResult(): array
     {
         $resource = [];

@@ -8,8 +8,10 @@ use MoneyGo\Resource\RateResource;
 
 final class Rate extends BaseMethod
 {
-
-    public function response(): Rate
+    /**
+     * @return $this
+     */
+    public function send(): Rate
     {
         $content = $this->client
             ->get("api/currencies/rates", [
@@ -29,6 +31,9 @@ final class Rate extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getResult(): array
     {
         $rates = [];

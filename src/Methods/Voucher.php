@@ -12,13 +12,20 @@ final class Voucher extends BaseMethod
 {
     private $page = 1;
 
+    /**
+     * @param $page
+     * @return $this
+     */
     public function setPage($page): Voucher
     {
         $this->page = $page;
         return $this;
     }
 
-    public function response(): Voucher
+    /**
+     * @return $this
+     */
+    public function send(): Voucher
     {
         $content = $this->client
             ->get("api/vouchers", [
@@ -39,6 +46,9 @@ final class Voucher extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return PaginationResource
+     */
     public function getResult(): PaginationResource
     {
         $data = $this->arrayResult['data'];

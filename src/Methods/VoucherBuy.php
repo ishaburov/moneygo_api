@@ -14,6 +14,7 @@ final class VoucherBuy extends BaseMethod
 
     /**
      * @param mixed $amount
+     * @return VoucherBuy
      */
     public function setAmount($amount): VoucherBuy
     {
@@ -23,6 +24,7 @@ final class VoucherBuy extends BaseMethod
 
     /**
      * @param mixed $walletFrom
+     * @return VoucherBuy
      */
     public function setWalletFrom($walletFrom): VoucherBuy
     {
@@ -32,6 +34,7 @@ final class VoucherBuy extends BaseMethod
 
     /**
      * @param mixed $description
+     * @return VoucherBuy
      */
     public function setDescription($description): VoucherBuy
     {
@@ -39,8 +42,10 @@ final class VoucherBuy extends BaseMethod
         return $this;
     }
 
-
-    public function response(): VoucherBuy
+    /**
+     * @return $this
+     */
+    public function send(): VoucherBuy
     {
         $content = $this->client
             ->post("api/vouchers/confirm", [
@@ -65,6 +70,9 @@ final class VoucherBuy extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return VoucherResource
+     */
     public function getResult(): VoucherResource
     {
         $data = $this->arrayResult['data'];

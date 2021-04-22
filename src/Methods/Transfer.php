@@ -23,38 +23,60 @@ final class Transfer extends BaseMethod
      */
     private $description;
 
-
+    /**
+     * @param string $walletFrom
+     * @return $this
+     */
     public function setWalletFromNumber(string $walletFrom): Transfer
     {
         $this->walletFromNumber = $walletFrom;
         return $this;
     }
 
+    /**
+     * @param string $walletTo
+     * @return $this
+     */
     public function setWalletToNumber(string $walletTo): Transfer
     {
         $this->walletToNumber = $walletTo;
         return $this;
     }
 
+    /**
+     * @param float $amount
+     * @return $this
+     */
     public function setAmount(float $amount): Transfer
     {
         $this->amount = $amount;
         return $this;
     }
 
+    /**
+     * @param string $paymentId
+     * @return $this
+     */
     public function setPaymentId(string $paymentId): Transfer
     {
         $this->paymentId = $paymentId;
         return $this;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): Transfer
     {
         $this->description = $description;
         return $this;
     }
 
-    public function response(): Transfer
+    /**
+     * @return $this
+     */
+    public function send(): Transfer
     {
         $content = $this->client
             ->post("api/transaction/transfer", [
@@ -81,6 +103,9 @@ final class Transfer extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return TransferResource
+     */
     public function getResult(): TransferResource
     {
         $result = $this->arrayResult['data'];

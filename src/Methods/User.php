@@ -9,7 +9,10 @@ use MoneyGo\Resource\UserResource;
 
 final class User extends BaseMethod
 {
-    public function response(): User
+    /**
+     * @return $this
+     */
+    public function send(): User
     {
         $content = $this->client
             ->get('api/user/me', ['headers' => [
@@ -27,6 +30,9 @@ final class User extends BaseMethod
         return $this;
     }
 
+    /**
+     * @return UserResource
+     */
     public function getResult(): UserResource
     {
         $result = $this->arrayResult['data'];

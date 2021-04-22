@@ -11,19 +11,29 @@ final class Token extends BaseMethod
     protected $clientId;
     protected $clientSecret;
 
+    /**
+     * @param string $clientId
+     * @return $this
+     */
     public function setClientId(string $clientId): Token
     {
         $this->clientId = $clientId;
         return $this;
     }
 
+    /**
+     * @param string $clientSecret
+     * @return $this
+     */
     public function setClientSecret(string $clientSecret): Token
     {
         $this->clientSecret = $clientSecret;
         return $this;
     }
 
-
+    /**
+     * @return array
+     */
     protected function getBody(): array
     {
         return [
@@ -34,7 +44,10 @@ final class Token extends BaseMethod
         ];
     }
 
-    public function response(): TokenResource
+    /**
+     * @return TokenResource
+     */
+    public function send(): TokenResource
     {
         $content = $this->client
             ->post('token', ['json' => $this->getBody()])
@@ -46,6 +59,10 @@ final class Token extends BaseMethod
         return $this->getResult($result);
     }
 
+    /**
+     * @param array $result
+     * @return TokenResource
+     */
     protected function getResult(array $result): TokenResource
     {
         $resource = new TokenResource();
