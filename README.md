@@ -1,5 +1,7 @@
 # Api for MoneyGo wallet
 
+## Install
+composer require money-go/money-go-api
 ## Api documentation
 
 #### https://moneygo.docs.apiary.io
