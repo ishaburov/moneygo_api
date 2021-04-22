@@ -4,10 +4,12 @@
 namespace MoneyGo\Methods;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\TransferResource;
 
 final class Transfer extends BaseMethod
 {
+    private const URL = "api/transaction/transfer";
     private $walletFromNumber;
     private $walletToNumber;
     /**
@@ -75,11 +77,12 @@ final class Transfer extends BaseMethod
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): Transfer
     {
         $content = $this->client
-            ->post("api/transaction/transfer", [
+            ->post(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken,
                 ],

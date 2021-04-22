@@ -2,6 +2,7 @@
 
 namespace MoneyGo;
 
+use GuzzleHttp\Client;
 use MoneyGo\Methods\ActivateVoucher;
 use MoneyGo\Methods\Currency;
 use MoneyGo\Methods\FindVoucher;
@@ -16,29 +17,20 @@ use MoneyGo\Methods\VoucherBuy;
 use MoneyGo\Methods\Wallet;
 use MoneyGo\Methods\WalletExists;
 
-final class ApiProvider
+final class MoneyGoApi
 {
     /*** @var Client */
     private $client;
     /*** @var string */
     private $accessToken;
+    private const BASE_URL = 'https://api.money-go.com';
 
     /**
      * ApiProvider constructor.
-     * @param Client $client
      */
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
-    }
-
-    /**
-     * @return \GuzzleHttp\Client
-     */
-    private function getClient(): \GuzzleHttp\Client
-    {
-        return $this->client
-            ->getClient();
+        $this->client = new Client(['base_uri' => self::BASE_URL]);;
     }
 
     /**
@@ -151,5 +143,13 @@ final class ApiProvider
     public function processingCheckout(): ProcessingCheckout
     {
         return new ProcessingCheckout($this->getClient(), $this->accessToken);
+    }
+
+    /**
+     * @return Client
+     */
+    private function getClient(): Client
+    {
+        return $this->client;
     }
 }

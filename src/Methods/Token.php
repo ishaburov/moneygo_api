@@ -2,11 +2,13 @@
 
 namespace MoneyGo\Methods;
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\TokenResource;
 
 final class Token extends BaseMethod
 {
-    protected $grandType = 'client_credentials';
+    private const URL = 'token';
+    protected $grantType = 'client_credentials';
     protected $scope = 'api';
     protected $clientId;
     protected $clientSecret;
@@ -37,7 +39,7 @@ final class Token extends BaseMethod
     protected function getBody(): array
     {
         return [
-            "grant_type" => $this->grandType,
+            "grant_type" => $this->grantType,
             "client_id" => $this->clientId,
             "client_secret" => $this->clientSecret,
             "scope" => $this->scope
@@ -46,11 +48,12 @@ final class Token extends BaseMethod
 
     /**
      * @return TokenResource
+     * @throws GuzzleException
      */
     public function send(): TokenResource
     {
         $content = $this->client
-            ->post('token', ['json' => $this->getBody()])
+            ->post(self::URL, ['json' => $this->getBody()])
             ->getBody()
             ->getContents();
 

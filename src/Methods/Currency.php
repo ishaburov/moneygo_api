@@ -4,18 +4,21 @@
 namespace MoneyGo\Methods;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\CurrencyResource;
 
 final class Currency extends BaseMethod
 {
+    private const URL = "api/currencies";
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): Currency
     {
         $content = $this->client
-            ->get("api/currencies", [
+            ->get(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken,
                 ]

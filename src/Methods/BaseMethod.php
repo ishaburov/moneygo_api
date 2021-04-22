@@ -18,6 +18,11 @@ abstract class BaseMethod
     protected $accessToken;
 
     /**
+     * @return mixed
+     */
+    abstract public function send();
+
+    /**
      * BaseMethod constructor.
      * @param Client $client
      * @param string|null $accessToken
@@ -26,15 +31,6 @@ abstract class BaseMethod
     {
         $this->client = $client;
         $this->accessToken = $accessToken;
-    }
-
-    /**
-     * @param string $json
-     * @return mixed
-     */
-    protected function decode(string $json)
-    {
-        return json_decode($json, true);
     }
 
     /**
@@ -70,7 +66,11 @@ abstract class BaseMethod
     }
 
     /**
+     * @param string $json
      * @return mixed
      */
-    abstract public function send();
+    protected function decode(string $json)
+    {
+        return json_decode($json, true);
+    }
 }

@@ -4,10 +4,11 @@
 namespace MoneyGo\Methods;
 
 
-use MoneyGo\Resource\FindVoucherResource;
+use GuzzleHttp\Exception\GuzzleException;
 
 final class ActivateVoucher extends BaseMethod
 {
+    private const URL = "api/vouchers/activation";
     protected $voucherNumber;
     protected $voucherCode;
     protected $walletId;
@@ -66,11 +67,12 @@ final class ActivateVoucher extends BaseMethod
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): ActivateVoucher
     {
         $content = $this->client
-            ->post("api/vouchers/activation", [
+            ->post(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken
                 ],

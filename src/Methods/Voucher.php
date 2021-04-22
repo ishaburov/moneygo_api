@@ -4,12 +4,14 @@
 namespace MoneyGo\Methods;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\MetaResource;
 use MoneyGo\Resource\PaginationResource;
 use MoneyGo\Resource\VoucherResource;
 
 final class Voucher extends BaseMethod
 {
+    private const URL = 'api/vouchers';
     private $page = 1;
 
     /**
@@ -24,11 +26,12 @@ final class Voucher extends BaseMethod
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): Voucher
     {
         $content = $this->client
-            ->get("api/vouchers", [
+            ->get(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken
                 ],

@@ -16,7 +16,7 @@ composer require money-go/money-go-api
   - get access_token and set the token to ApiProvider class 
 
 ``` 
-$apiProvider = (new MoneyGo\Client())->getApiProvider();
+$apiProvider = new MoneyGoApi();
     $clientId = '';
     $secret = '';
     

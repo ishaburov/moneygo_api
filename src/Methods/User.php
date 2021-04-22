@@ -4,18 +4,21 @@
 namespace MoneyGo\Methods;
 
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\UserResource;
 
 final class User extends BaseMethod
 {
+    private const URL = 'api/user/me';
+
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): User
     {
         $content = $this->client
-            ->get('api/user/me', ['headers' => [
+            ->get(self::URL, ['headers' => [
                 'Authorization' => $this->accessToken
             ]])
             ->getBody()

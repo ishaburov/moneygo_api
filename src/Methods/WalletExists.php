@@ -4,10 +4,12 @@
 namespace MoneyGo\Methods;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\WalletExistsResource;
 
 final class WalletExists extends BaseMethod
 {
+    private const URL = "api/wallet-exists";
     /*** @var string */
     private $walletToNumber = "";
     /*** @var string */
@@ -37,11 +39,12 @@ final class WalletExists extends BaseMethod
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): WalletExists
     {
         $content = $this->client
-            ->get("api/wallet-exists", [
+            ->get(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken,
                 ],

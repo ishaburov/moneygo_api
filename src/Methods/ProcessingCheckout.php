@@ -4,10 +4,12 @@
 namespace MoneyGo\Methods;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\ProcessingCheckoutResource;
 
 final class ProcessingCheckout extends BaseMethod
 {
+    private const URL = "api/processing/checkout";
     protected $secret;
     protected $id;
     protected $amount;
@@ -99,12 +101,13 @@ final class ProcessingCheckout extends BaseMethod
 
     /**
      * @return $this
+     * @throws GuzzleException
      */
     public function send(): ProcessingCheckout
     {
 
         $content = $this->client
-            ->post("api/processing/checkout", [
+            ->post(self::URL, [
                 'headers' => [
                     'Authorization' => $this->accessToken
                 ],
