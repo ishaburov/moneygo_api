@@ -23,7 +23,7 @@ $apiProvider = (new MoneyGo\Client())->getApiProvider();
     $accessToken = $apiProvider->getToken()
     ->setClientId($clientId)
     ->setClientSecret($secret)
-    ->response()
+    ->send()
     ->getAccessToken();
     
     $apiProvider->setAccessToken($accessToken);    
@@ -32,20 +32,20 @@ $apiProvider = (new MoneyGo\Client())->getApiProvider();
 #### Get information about self account
 ```
 $apiProvider->getMe()
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Get available wallets your account
 ```     
 $apiProvider->getWallets()
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Search client wallet's which use moneyGO wallet
 ```
 $apiProvider->searchWallet()
         ->setWalletNumber('CLIENT_WALLET_NUMBER')
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Check exists client wallet's which use moneyGO wallet
@@ -53,7 +53,7 @@ $apiProvider->searchWallet()
    $apiProvider->walletExists()
         ->setWalletFromNumber('CLIENT_WALLET_NUMBER')
         ->setWalletToNumber('YOUR_WALLET_NUMBER')
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Withdraw money to moneyGO client wallet's
@@ -64,20 +64,20 @@ $apiProvider->searchWallet()
         ->setAmount(0.1)
         ->setPaymentId('EXAMPLE_PAYMENT_INFO')
         ->setDescription('EXAMPLE_DESCRIPTION')
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Get all currencies which use moneyGo
 ```
 $apiProvider->currencies()
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Get pagination vouchers
 ```   
    $apiProvider->vouchers()
         ->setPage(1)
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Buy voucher
@@ -86,7 +86,7 @@ $apiProvider->currencies()
         ->setAmount('0.1')
         ->setWalletFrom('YOUR_WALLET_NUMBER')
         ->setDescription('EXAMPLE_DESCRIPTION')
-        ->response()
+        ->send()
         ->getResult();
 ```
 #### Find voucher for activation
@@ -95,7 +95,7 @@ $apiProvider->currencies()
         ->setWalletNumber('YOUR_WALLET_NUMBER')
         ->setVoucherCode('VOUCHER_SECRET')
         ->setVoucherNumber('VOUCHER_ID')
-        ->response()
+        ->send()
         ->getResult();
 ```
 #### Activate voucher
@@ -105,7 +105,7 @@ $apiProvider->currencies()
         ->setVoucherCode('VOUCHER_SECRET')
         ->setVoucherNumber('VOUCHER_ID')
         ->setDescription('EXAMPLE_DESCRIPTION')
-        ->response()
+        ->send()
         ->getResult()
 ```
 #### Processing checkout(Create payment link, deposit your account)
@@ -119,6 +119,6 @@ $apiProvider->currencies()
         ->setSuccessUrl('SUCCESS_URL') // link where redirect user after success
         ->setStatusUrl('STATUS_URL') // link where you get payment status
         ->setCancelUrl('CANCEL_URL') // link where redirect user after cancel
-        ->response()
+        ->send()
         ->getResult()
 ```
