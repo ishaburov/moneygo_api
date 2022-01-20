@@ -9,28 +9,19 @@ use MoneyGo\Resource\RateResource;
 
 final class Rate extends BaseMethod
 {
-    private const URL = "api/currencies/rates";
+    private const URL = "/api/currencies/rates";
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): Rate
     {
         $content = $this->client
-            ->get(self::URL, [
-                'headers' => [
-                    'Authorization' => $this->accessToken
-                ]
-            ])
-            ->getBody()
-            ->getContents();
+            ->get(self::URL);
 
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        
+        $this->setArrayResult($content);
 
         return $this;
     }

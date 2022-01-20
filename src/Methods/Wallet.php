@@ -4,31 +4,23 @@
 namespace MoneyGo\Methods;
 
 
-use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\WalletResource;
 
 final class Wallet extends BaseMethod
 {
-    private const URL = 'api/wallets';
+    private const URL = '/api/wallets';
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): Wallet
     {
         $content = $this->client
-            ->get(self::URL, ['headers' => [
-                'Authorization' => $this->accessToken
-            ]])
-            ->getBody()
-            ->getContents();
-
+            ->get(self::URL);
+    
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        
+        $this->setArrayResult($content);
 
         return $this;
     }

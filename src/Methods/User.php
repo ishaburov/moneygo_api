@@ -4,35 +4,27 @@
 namespace MoneyGo\Methods;
 
 
-use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\UserResource;
 
 final class User extends BaseMethod
 {
-    private const URL = 'api/user/me';
-
+    private const URL = '/api/user/me';
+    
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): User
     {
         $content = $this->client
-            ->get(self::URL, ['headers' => [
-                'Authorization' => $this->accessToken
-            ]])
-            ->getBody()
-            ->getContents();
-
+          ->get(self::URL, []);
+        
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
-
+        
+        $this->setArrayResult($content);
+        
         return $this;
     }
-
+    
     /**
      * @return UserResource
      */
@@ -57,6 +49,7 @@ final class User extends BaseMethod
         $Resource->setDocumentUploaded($result['document_uploaded']);
         $Resource->setDocumentVerify($result['document_verify']);
         $Resource->setIsExchanger($result['is_excharger']);
+        
         return $Resource;
     }
 }

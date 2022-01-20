@@ -3,13 +3,11 @@
 
 namespace MoneyGo\Methods;
 
-
-use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\TransferResource;
 
 final class Transfer extends BaseMethod
 {
-    private const URL = "api/transaction/transfer";
+    private const URL = "/api/transaction/transfer";
     private $walletFromNumber;
     private $walletToNumber;
     /**
@@ -77,31 +75,20 @@ final class Transfer extends BaseMethod
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): Transfer
     {
         $content = $this->client
             ->post(self::URL, [
-                'headers' => [
-                    'Authorization' => $this->accessToken,
-                ],
-                'json' => [
-                    'wallet_from' => $this->walletFromNumber,
-                    'wallet_to' => $this->walletToNumber,
-                    'amount' => $this->amount,
-                    'payment_id' => $this->paymentId,
-                    'description' => $this->description
-                ]
-            ])
-            ->getBody()
-            ->getContents();
-
+              'wallet_from' => $this->walletFromNumber,
+              'wallet_to' => $this->walletToNumber,
+              'amount' => $this->amount,
+              'payment_id' => $this->paymentId,
+              'description' => $this->description
+            ]);
+        
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        $this->setArrayResult($content);
 
         return $this;
     }
@@ -112,10 +99,11 @@ final class Transfer extends BaseMethod
     public function getResult(): TransferResource
     {
         $result = $this->arrayResult['data'];
+        
         $resource = new TransferResource();
         $resource->setId($result['id']);
-        $resource->setAmount(isset($result['amount']) ? $result['amount'] : 0);
-        $resource->setIsExchanger(isset($result['is_exchanger']) ? $result['is_exchanger'] : false);
+        $resource->setAmount($result['amount'] ?? $this->amount);
+        $resource->setIsExchanger($result['is_exchanger'] ?? false);
         $resource->setMessage($result['message']);
 
         return $resource;

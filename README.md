@@ -114,10 +114,11 @@ $apiProvider->currencies()
         ->setSecret('FORM_SECRET_KEY')
         ->setId('EXAMPLE_PAYMENT_INFO')
         ->setAmount(1)
+        ->setUserInfo('EXAMPLE USER_INFO') //PLEASE fill user_info with unique user value 
         ->setWalletToNumber('YOUR_WALLET_NUMBER')
         ->setWalletFromNumber('CLIENT_WALLET_NUMBER')
         ->setSuccessUrl('SUCCESS_URL') // link where redirect user after success
-        ->setStatusUrl('STATUS_URL') // link where you get payment status
+        ->setStatusUrl('STATUS_URL') // link where you get payment status e.g https://webhook.site
         ->setCancelUrl('CANCEL_URL') // link where redirect user after cancel
         ->send()
         ->getResult()

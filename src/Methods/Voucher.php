@@ -4,16 +4,15 @@
 namespace MoneyGo\Methods;
 
 
-use GuzzleHttp\Exception\GuzzleException;
 use MoneyGo\Resource\MetaResource;
 use MoneyGo\Resource\PaginationResource;
 use MoneyGo\Resource\VoucherResource;
 
 final class Voucher extends BaseMethod
 {
-    private const URL = 'api/vouchers';
+    private const URL = '/api/vouchers';
     private $page = 1;
-
+    
     /**
      * @param $page
      * @return $this
@@ -21,34 +20,25 @@ final class Voucher extends BaseMethod
     public function setPage($page): Voucher
     {
         $this->page = $page;
+        
         return $this;
     }
-
+    
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): Voucher
     {
         $content = $this->client
-            ->get(self::URL, [
-                'headers' => [
-                    'Authorization' => $this->accessToken
-                ],
-                'query' => ['page' => $this->page]
-            ])
-            ->getBody()
-            ->getContents();
-
+          ->get(self::URL, ['page' => $this->page]);
+        
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
-
+        
+        $this->setArrayResult($content);
+        
         return $this;
     }
-
+    
     /**
      * @return PaginationResource
      */
@@ -56,7 +46,7 @@ final class Voucher extends BaseMethod
     {
         $data = $this->arrayResult['data'];
         $items = [];
-
+        
         foreach ($data['items'] as $item) {
             $voucherResource = new VoucherResource();
             $voucherResource->setId($item['id']);
@@ -65,24 +55,24 @@ final class Voucher extends BaseMethod
             $voucherResource->setSecret($item['secret']);
             $voucherResource->setDateCreated($item['dateCreated']);
             $voucherResource->setCurrencyCode($item['currencyCode']);
-
+            
             $items[] = $voucherResource;
         }
         $meta = new MetaResource();
-
+        
         $meta->setLastPage($data['meta']['last_page']);
         $meta->setPage($data['meta']['page']);
         $meta->setPerPage($data['meta']['per_page']);
         $meta->setTotal($data['meta']['total']);
-
+        
         $pagination = new PaginationResource();
-
+        
         $data['items'] = $items;
         $data['meta'] = $meta;
-
+        
         $pagination->setItems($items);
         $pagination->setMeta($meta);
-
+        
         return $pagination;
     }
 }

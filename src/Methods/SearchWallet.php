@@ -9,7 +9,7 @@ use MoneyGo\Resource\SearchWalletResource;
 
 final class SearchWallet extends BaseMethod
 {
-    private const URL = "api/wallets/search/";
+    private const URL = "/api/wallets/search/";
     /*** @var string */
     private $walletNumber = "";
 
@@ -21,24 +21,15 @@ final class SearchWallet extends BaseMethod
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): SearchWallet
     {
         $content = $this->client
-            ->get(self::URL . "{$this->walletNumber}", [
-                'headers' => [
-                    'Authorization' => $this->accessToken
-                ]
-            ])
-            ->getBody()
-            ->getContents();
+            ->get(self::URL . "{$this->walletNumber}");
 
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        
+        $this->setArrayResult($content);
 
         return $this;
     }

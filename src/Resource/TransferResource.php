@@ -70,7 +70,7 @@ final class TransferResource
     /**
      * @param int $amount
      */
-    public function setAmount(int $amount)
+    public function setAmount(float $amount)
     {
         $this->amount = $amount;
     }

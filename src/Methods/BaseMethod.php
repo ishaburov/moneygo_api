@@ -4,11 +4,11 @@
 namespace MoneyGo\Methods;
 
 
-use GuzzleHttp\Client;
+use MoneyGo\Curl\Curl;
 
 abstract class BaseMethod
 {
-    /*** @var Client */
+    /*** @var Curl */
     protected $client;
     protected $originalResult;
     protected $arrayResult;
@@ -16,23 +16,23 @@ abstract class BaseMethod
      * @var string|null
      */
     protected $accessToken;
-
+    
     /**
      * @return mixed
      */
     abstract public function send();
-
+    
     /**
      * BaseMethod constructor.
-     * @param Client $client
-     * @param string|null $accessToken
+     * @param  Curl  $client
+     * @param  string|null  $accessToken
      */
-    public function __construct(Client $client, string $accessToken = null)
+    public function __construct(Curl $client, string $accessToken = null)
     {
         $this->client = $client;
         $this->accessToken = $accessToken;
     }
-
+    
     /**
      * @return mixed
      */
@@ -40,23 +40,27 @@ abstract class BaseMethod
     {
         return $this->originalResult;
     }
-
+    
     /**
-     * @param string $content
+     * @param  string  $content
      */
-    public function setOriginal(string $content)
+    public function setOriginal(object $content)
     {
         $this->originalResult = $content;
     }
-
+    
     /**
-     * @param array $content
+     * @param  object  $content
      */
-    public function setArrayResult(array $content)
+    public function setArrayResult(object $content): void
     {
-        $this->arrayResult = $content;
+        $this->arrayResult = json_decode(json_encode($content), true);
+        
+        if ((isset($this->arrayResult['status']) && !$this->arrayResult['status']) || $this->client->getHttpStatusCode() !== 200) {
+            throw new \UnexpectedValueException(json_encode($this->arrayResult), $this->client->getHttpStatusCode());
+        }
     }
-
+    
     /**
      * @return mixed
      */
@@ -64,9 +68,9 @@ abstract class BaseMethod
     {
         return $this->arrayResult;
     }
-
+    
     /**
-     * @param string $json
+     * @param  string  $json
      * @return mixed
      */
     protected function decode(string $json)

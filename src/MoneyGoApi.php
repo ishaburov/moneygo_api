@@ -2,7 +2,7 @@
 
 namespace MoneyGo;
 
-use GuzzleHttp\Client;
+use MoneyGo\Curl\Curl;
 use MoneyGo\Methods\ActivateVoucher;
 use MoneyGo\Methods\Currency;
 use MoneyGo\Methods\FindVoucher;
@@ -19,26 +19,36 @@ use MoneyGo\Methods\WalletExists;
 
 final class MoneyGoApi
 {
-    /*** @var Client */
+    public static $isProd = true;
+    /*** @var Curl */
     private $client;
     /*** @var string */
     private $accessToken;
     private const BASE_URL = 'https://api.money-go.com';
+    private const BASE_URL_TEST = 'https://api.money-go-test.com';
 
     /**
      * ApiProvider constructor.
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => self::BASE_URL]);;
+        $this->client = new Curl(static::$isProd ? self::BASE_URL : self::BASE_URL_TEST);
     }
 
     /**
      * @param string $token
      */
-    public function setAccessToken(string $token)
+    public function setAccessToken(string $token): void
     {
         $this->accessToken = $token;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isProd(): bool
+    {
+        return self::$isProd;
     }
 
     /**
@@ -146,9 +156,9 @@ final class MoneyGoApi
     }
 
     /**
-     * @return Client
+     * @return Curl
      */
-    private function getClient(): Client
+    private function getClient(): Curl
     {
         return $this->client;
     }

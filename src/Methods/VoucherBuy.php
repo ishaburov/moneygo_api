@@ -9,7 +9,7 @@ use MoneyGo\Resource\VoucherResource;
 
 final class VoucherBuy extends BaseMethod
 {
-    private const URL = "api/vouchers/confirm";
+    private const URL = "/api/vouchers/confirm";
     private $amount;
     private $walletFrom;
     private $description;
@@ -46,29 +46,19 @@ final class VoucherBuy extends BaseMethod
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): VoucherBuy
     {
         $content = $this->client
             ->post(self::URL, [
-                'headers' => [
-                    'Authorization' => $this->accessToken
-                ],
-                'json' => [
-                    'amount' => $this->amount,
-                    'wallet_from' => $this->walletFrom,
-                    'additional' => $this->description
-                ]
-            ])
-            ->getBody()
-            ->getContents();
+              'amount' => $this->amount,
+              'wallet_from' => $this->walletFrom,
+              'additional' => $this->description
+            ]);
 
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        
+        $this->setArrayResult($content);
 
         return $this;
     }

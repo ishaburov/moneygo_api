@@ -9,7 +9,7 @@ use MoneyGo\Resource\FindVoucherResource;
 
 final class FindVoucher extends BaseMethod
 {
-    private const URL = "api/vouchers/activation";
+    private const URL = "/api/vouchers/activation";
     protected $voucherNumber;
     protected $voucherCode;
     protected $walletId;
@@ -57,30 +57,20 @@ final class FindVoucher extends BaseMethod
 
     /**
      * @return $this
-     * @throws GuzzleException
      */
     public function send(): FindVoucher
     {
         $content = $this->client
             ->get(self::URL, [
-                'headers' => [
-                    'Authorization' => $this->accessToken
-                ],
-                'query' => [
-                    'voucher_number' => $this->voucherNumber,
-                    'voucher_code' => $this->voucherCode,
-                    'wallet_number' => $this->walletNumber,
-                    'wallet_id' => $this->walletId
-                ]
-            ])
-            ->getBody()
-            ->getContents();
+              'voucher_number' => $this->voucherNumber,
+              'voucher_code' => $this->voucherCode,
+              'wallet_number' => $this->walletNumber,
+              'wallet_id' => $this->walletId
+            ]);
 
         $this->setOriginal($content);
-
-        $result = $this->decode($content);
-
-        $this->setArrayResult($result);
+        
+        $this->setArrayResult($content);
 
         return $this;
     }
