@@ -18,10 +18,12 @@
   },
   "autoload": {
     "psr-4": {
-      "MoneyGo\\": "src/"
+      "MoneyGo\\": "src/",
+      "Tests\\": "tests/"
     }
   },
   "require-dev": {
-    "larapack/dd": "1.*"
+    "larapack/dd": "1.*",
+    "phpunit/phpunit": "^9.5"
   }
 }

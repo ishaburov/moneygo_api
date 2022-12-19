@@ -8,22 +8,18 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 $apiProvider = new \MoneyGo\MoneyGoApi();
 
-
-$clientId = '';
-$secret = '';
+$clientId = '62e9ca749b10bda62c383d57554e41e8';
+$secret = 'cc48996b6be29aac39950ef274797beab76351458428bd14a4c90e11f02b640a5bc0c2b302fbfd65dc8014a0cfcfd447d42836a7d59f32441ab72120e7927568';
 
 try {
     $accessToken = $apiProvider->getToken()
       ->setClientId($clientId)
       ->setClientSecret($secret)
-      ->send()
-      ->getAccessToken();
-    
-    $apiProvider->setAccessToken($accessToken);
+      ->send();
+    $apiProvider->setAccessToken($accessToken->getAccessToken());
 } catch (\UnexpectedValueException $exception) {
     dd($exception->getMessage(), $exception->getCode());
 }
-
 
 dd($apiProvider->getMe()
   ->send()

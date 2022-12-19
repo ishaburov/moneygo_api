@@ -40,6 +40,7 @@ final class MoneyGoApi
      */
     public function setAccessToken(string $token): void
     {
+        $this->client->setHeader('Authorization', 'Bearer ' . $token);
         $this->accessToken = $token;
     }
     
@@ -57,6 +58,11 @@ final class MoneyGoApi
     public function getToken(): Token
     {
         return new Token($this->getClient());
+    }
+
+    public function getTokenString(): string
+    {
+        return $this->accessToken;
     }
 
     /**
