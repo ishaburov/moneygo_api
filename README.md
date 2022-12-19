@@ -10,11 +10,11 @@ composer require money-go/money-go-api
 
 ### 1. Get CLIENT_ID and CLIENT_SECRET by contacting us
 ### 2. Get access_token using method
+https://api.money-go.com/token
   - set client id
   - set client secret
   - get response using the method send
   - get access_token and set the token to ApiProvider class 
-
 ``` 
 $apiProvider = new MoneyGoApi();
     $clientId = '';
@@ -30,18 +30,21 @@ $apiProvider = new MoneyGoApi();
 ```
 ### 3. Available methods
 #### Get information about my account
+https://api.money-go.com/api/user/me
 ```
 $apiProvider->getMe()
         ->send()
         ->getResult()
 ```
 #### Get information about available wallets in your account
+https://api.money-go.com/api/wallets
 ```     
 $apiProvider->getWallets()
         ->send()
         ->getResult()
 ```
 #### Search client wallet's which use MoneyGo wallet
+https://api.money-go.com/api/wallets/search/WALLET_CODE
 ```
 $apiProvider->searchWallet()
         ->setWalletNumber('CLIENT_WALLET_NUMBER')
@@ -49,6 +52,7 @@ $apiProvider->searchWallet()
         ->getResult()
 ```
 #### Check exists client wallet's which use MoneyGo wallet
+https://api.money-go.com/api/wallet-exists?number_to=&number_from=
 ```   
    $apiProvider->walletExists()
         ->setWalletFromNumber('CLIENT_WALLET_NUMBER')
@@ -57,6 +61,7 @@ $apiProvider->searchWallet()
         ->getResult()
 ```
 #### Withdraw money to moneyGO client wallet's
+https://api.money-go.com/api/transaction/transfer
 ```  
   $apiProvider->transfer()
         ->setWalletFromNumber(YOUR_WALLET_NUMBER')
@@ -68,12 +73,14 @@ $apiProvider->searchWallet()
         ->getResult()
 ```
 #### Get all currencies which are used on MoneyGo
+https://api.money-go.com/api/currencies
 ```
 $apiProvider->currencies()
         ->send()
         ->getResult()
 ```
 #### Get pagination vouchers
+https://api.money-go.com/api/vouchers?page=page
 ```   
    $apiProvider->vouchers()
         ->setPage(1)
@@ -81,6 +88,7 @@ $apiProvider->currencies()
         ->getResult()
 ```
 #### Buy voucher
+https://api.money-go.com/api/vouchers/buy
 ```    
     $apiProvider->buyVoucher()
         ->setAmount('0.1')
@@ -90,6 +98,7 @@ $apiProvider->currencies()
         ->getResult();
 ```
 #### Find voucher for activation
+https://api.money-go.com/api/vouchers/activation?voucher_number=voucher_number&voucher_code=voucher_code&wallet_id=wallet_id&wallet_number=wallet_number
 ```   
    $apiProvider->findVoucher()
         ->setWalletNumber('YOUR_WALLET_NUMBER')
@@ -99,6 +108,7 @@ $apiProvider->currencies()
         ->getResult();
 ```
 #### Activate voucher
+https://api.money-go.com/api/vouchers/activation
 ``` 
  $apiProvider->activateVoucher()
         ->setWalletNumber('WALLET_NUMBER') // You can activate to other wallet
@@ -109,6 +119,7 @@ $apiProvider->currencies()
         ->getResult()
 ```
 #### Processing checkout(Create payment link, deposit your account)
+https://api.money-go.com/api/processing/checkout
 ``` 
  $apiProvider->processingCheckout()
         ->setSecret('FORM_SECRET_KEY')
