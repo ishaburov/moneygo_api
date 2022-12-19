@@ -72,9 +72,7 @@ final class Token extends BaseMethod
         $resource->setAccessToken($result['access_token']);
         $resource->setExpiresIn($result['expires_in']);
         $resource->setTokenType($result['token_type']);
-        
-        $this->client->setHeader('Authorization', $resource->getAccessToken());
-        
+
         return $resource;
     }
 }
