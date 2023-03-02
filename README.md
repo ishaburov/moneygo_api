@@ -87,37 +87,68 @@ https://api.money-go.com/api/vouchers?page=page
         ->send()
         ->getResult()
 ```
-#### Buy voucher
-https://api.money-go.com/api/vouchers/buy
-```    
-    $apiProvider->buyVoucher()
-        ->setAmount('0.1')
-        ->setWalletFrom('YOUR_WALLET_NUMBER')
-        ->setDescription('EXAMPLE_DESCRIPTION')
-        ->send()
-        ->getResult();
-```
-#### Find voucher for activation
-https://api.money-go.com/api/vouchers/activation?voucher_number=voucher_number&voucher_code=voucher_code&wallet_id=wallet_id&wallet_number=wallet_number
-```   
-   $apiProvider->findVoucher()
-        ->setWalletNumber('YOUR_WALLET_NUMBER')
-        ->setVoucherCode('VOUCHER_SECRET')
-        ->setVoucherNumber('VOUCHER_ID')
-        ->send()
-        ->getResult();
-```
-#### Activate voucher
-https://api.money-go.com/api/vouchers/activation
-``` 
- $apiProvider->activateVoucher()
-        ->setWalletNumber('WALLET_NUMBER') // You can activate to other wallet
-        ->setVoucherCode('VOUCHER_SECRET')
-        ->setVoucherNumber('VOUCHER_ID')
-        ->setDescription('EXAMPLE_DESCRIPTION')
-        ->send()
-        ->getResult()
-```
+
+[//]: # (#### Buy voucher)
+
+[//]: # (https://api.money-go.com/api/vouchers/buy)
+
+[//]: # (```    )
+
+[//]: # (    $apiProvider->buyVoucher&#40;&#41;)
+
+[//]: # (        ->setAmount&#40;'0.1'&#41;)
+
+[//]: # (        ->setWalletFrom&#40;'YOUR_WALLET_NUMBER'&#41;)
+
+[//]: # (        ->setDescription&#40;'EXAMPLE_DESCRIPTION'&#41;)
+
+[//]: # (        ->send&#40;&#41;)
+
+[//]: # (        ->getResult&#40;&#41;;)
+
+[//]: # (```)
+
+[//]: # (#### Find voucher for activation)
+
+[//]: # (https://api.money-go.com/api/vouchers/activation?voucher_number=voucher_number&voucher_code=voucher_code&wallet_id=wallet_id&wallet_number=wallet_number)
+
+[//]: # (```   )
+
+[//]: # (   $apiProvider->findVoucher&#40;&#41;)
+
+[//]: # (        ->setWalletNumber&#40;'YOUR_WALLET_NUMBER'&#41;)
+
+[//]: # (        ->setVoucherCode&#40;'VOUCHER_SECRET'&#41;)
+
+[//]: # (        ->setVoucherNumber&#40;'VOUCHER_ID'&#41;)
+
+[//]: # (        ->send&#40;&#41;)
+
+[//]: # (        ->getResult&#40;&#41;;)
+
+[//]: # (```)
+
+[//]: # (#### Activate voucher)
+
+[//]: # (https://api.money-go.com/api/vouchers/activation)
+
+[//]: # (``` )
+
+[//]: # ( $apiProvider->activateVoucher&#40;&#41;)
+
+[//]: # (        ->setWalletNumber&#40;'WALLET_NUMBER'&#41; // You can activate to other wallet)
+
+[//]: # (        ->setVoucherCode&#40;'VOUCHER_SECRET'&#41;)
+
+[//]: # (        ->setVoucherNumber&#40;'VOUCHER_ID'&#41;)
+
+[//]: # (        ->setDescription&#40;'EXAMPLE_DESCRIPTION'&#41;)
+
+[//]: # (        ->send&#40;&#41;)
+
+[//]: # (        ->getResult&#40;&#41;)
+
+[//]: # (```)
 #### Processing checkout(Create payment link, deposit your account)
 https://api.money-go.com/api/processing/checkout
 ``` 

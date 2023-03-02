@@ -130,6 +130,8 @@ final class MoneyGoApi
     }
 
     /**
+     * @deprecated since v1.40
+     *
      * @return VoucherBuy
      */
     public function buyVoucher(): VoucherBuy
@@ -138,6 +140,8 @@ final class MoneyGoApi
     }
 
     /**
+     * @deprecated since v1.40
+     *
      * @return FindVoucher
      */
     public function findVoucher(): FindVoucher
@@ -146,6 +150,8 @@ final class MoneyGoApi
     }
 
     /**
+     * @deprecated since v1.40
+     *
      * @return ActivateVoucher
      */
     public function activateVoucher(): ActivateVoucher
