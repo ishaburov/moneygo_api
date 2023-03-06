@@ -122,6 +122,7 @@ final class MoneyGoApi
     }
 
     /**
+     * @deprecated since v1.40
      * @return Voucher
      */
     public function vouchers(): Voucher

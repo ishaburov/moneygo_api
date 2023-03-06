@@ -79,14 +79,22 @@ $apiProvider->currencies()
         ->send()
         ->getResult()
 ```
-#### Get pagination vouchers
-https://api.money-go.com/api/vouchers?page=page
-```   
-   $apiProvider->vouchers()
-        ->setPage(1)
-        ->send()
-        ->getResult()
-```
+
+[//]: # (#### Get pagination vouchers)
+
+[//]: # (https://api.money-go.com/api/vouchers?page=page)
+
+[//]: # (```   )
+
+[//]: # (   $apiProvider->vouchers&#40;&#41;)
+
+[//]: # (        ->setPage&#40;1&#41;)
+
+[//]: # (        ->send&#40;&#41;)
+
+[//]: # (        ->getResult&#40;&#41;)
+
+[//]: # (```)
 
 [//]: # (#### Buy voucher)
 
